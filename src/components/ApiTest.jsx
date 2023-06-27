@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
+import config from "../config/config.json";
 const ApiTest = () => {
   const [testValue, SetTestValue] = useState({ data: [] });
   useEffect(() => {
     fetch(
-      "https://api.odcloud.kr/api/3073740/v1/uddi:52615e05-9e5a-49bc-bae6-b00fcf2e3e18?page=1&perPage=100&serviceKey=qsr5u284Dr5jGGroaJOV2K4kwjx05oiRVgYOUZKvIBTwqiXEMwp44m49pzMi/o6gwc6bI1pyEhLIUemc9bTtTw=="
+      `https://api.odcloud.kr/api/3073740/v1/uddi:52615e05-9e5a-49bc-bae6-b00fcf2e3e18?page=1&perPage=100&serviceKey=${config.seongnamBikeApiKey}`
     )
       .then((res) => {
-        if (res.status !== 200) return { status: res.status };
+        if (res.status !== 200)
+          throw new Error(`HTTP error! Status: ${res.status}`);
         return res.json();
       })
       .then((value) => {
         if (value.status !== undefined) SetTestValue(value);
         else SetTestValue(value);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
   return (
