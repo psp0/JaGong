@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+const SERVICE_KEY = process.env.REACT_APP_SEONGNAM_BIKE_API_KEY;
 const ApiTest = () => {
   const [testValue, SetTestValue] = useState({ data: [] });
   useEffect(() => {
     fetch(
-      `https://api.odcloud.kr/api/3073740/v1/uddi:52615e05-9e5a-49bc-bae6-b00fcf2e3e18?page=1&perPage=100&serviceKey=${process.env.SEONGNAM_BIKE_API_KEY}`
+      `https://api.odcloud.kr/api/3073740/v1/uddi:52615e05-9e5a-49bc-bae6-b00fcf2e3e18?page=1&perPage=100&serviceKey=${SERVICE_KEY}`
     )
       .then((res) => {
         if (res.status !== 200)
