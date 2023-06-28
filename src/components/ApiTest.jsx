@@ -4,7 +4,9 @@ const ApiTest = () => {
   const [testValue, SetTestValue] = useState({ data: [] });
   useEffect(() => {
     fetch(
-      `https://api.odcloud.kr/api/3073740/v1/uddi:52615e05-9e5a-49bc-bae6-b00fcf2e3e18?page=1&perPage=100&serviceKey=${config.seongnamBikeApiKey}`
+      `https://api.odcloud.kr/api/3073740/v1/uddi:52615e05-9e5a-49bc-bae6-b00fcf2e3e18?page=1&perPage=100&serviceKey=${
+        process.env.SEONGNAM_BIKE_API_KEY || config.SEONGNAM_BIKE_API_KEY
+      }`
     )
       .then((res) => {
         if (res.status !== 200)
