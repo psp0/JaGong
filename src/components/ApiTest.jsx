@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import dotenv from "dotenv";
+dotenv.config({ path: "../.env.local" });
+
 const SERVICE_KEY = process.env.REACT_APP_SEONGNAM_BIKE_API_KEY;
 const ApiTest = () => {
   const [testValue, SetTestValue] = useState({ data: [] });
