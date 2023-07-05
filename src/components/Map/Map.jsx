@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./Map.css";
+import auto from "../../assets/images/markers/Auto.png";
+import solar from "../../assets/images/markers/Solar.png";
+import electric from "../../assets/images/markers/Electric.png";
+
 const SERVICE_KEY = process.env.REACT_APP_SEONGNAM_BIKE_API_KEY;
 const Map = () => {
   const [SN, SetSN] = useState({ data: [] });
@@ -31,12 +35,18 @@ const Map = () => {
       };
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-    var imageSrc =
-        "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png", // 마커이미지의 주소입니다
-      imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
-      imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-
     SN.data.forEach((data) => {
+      var imageSrc =
+        data["공기주입기 종류"] === "전기식"
+          ? electric
+          : data["공기주입기 종류"] === "태양광"
+          ? solar
+          : data["공기주입기 종류"] === "수동식"
+          ? auto
+          : "";
+      var imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+        imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
       // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
       var markerImage = new kakao.maps.MarkerImage(
           imageSrc,
